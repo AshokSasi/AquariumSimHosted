@@ -1,14 +1,14 @@
 const express = require("express");
-const path = require("path");
 require("dotenv").config();
 const app = express();
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const publicPath = path.join(__dirname, "..", "public");
-const port = process.env.PORT || 3001;
+app.use(express.static(publicPath));
 app.use(cors());
 app.use(express.json());
+// const port = process.env.PORT || 3001;
 
 // create application/json parser
 var jsonParser = bodyParser.json();
@@ -21,6 +21,10 @@ const db = mysql.createConnection({
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.post("/fish", urlencodedParser, (req, res) => {
@@ -100,14 +104,6 @@ app.get("/fishGet", (req, res) => {
   });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"));
-});
-
-// app.listen(3001, () => {
-//   console.log("Server running on port 3001");
-// });
-
-app.listen(port, () => {
-  console.log(`Server is up on port ${port}!`);
+app.listen("3001", () => {
+  console.log("Server running on port 3001 ");
 });

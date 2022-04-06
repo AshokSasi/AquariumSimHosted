@@ -100,14 +100,6 @@ app.get("/fishGet", (req, res) => {
   });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"));
-});
-
-// app.listen(3001, () => {
-//   console.log("Server running on port 3001");
-// });
-
-app.listen(port, () => {
-  console.log(`Server is up on port ${port}!`);
+app.listen(3001, () => {
+  console.log("Server running on port 3001");
 });

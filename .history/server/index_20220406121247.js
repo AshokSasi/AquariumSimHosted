@@ -6,7 +6,6 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const publicPath = path.join(__dirname, "..", "public");
-const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
@@ -100,14 +99,6 @@ app.get("/fishGet", (req, res) => {
   });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"));
-});
-
-// app.listen(3001, () => {
-//   console.log("Server running on port 3001");
-// });
-
-app.listen(port, () => {
-  console.log(`Server is up on port ${port}!`);
+app.listen(3001, () => {
+  console.log("Server running on port 3001");
 });
